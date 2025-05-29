@@ -48,7 +48,7 @@ class _SymptomCheckerHomeState extends State<SymptomCheckerHome> {
         'https://api-inference.huggingface.co/models/google/flan-t5-base',
       ),
       headers: {
-        'Authorization': 'Bearer YOUR_HUGGINGFACE_API_KEY',
+        'Authorization': 'Bearer <YOUR_REAL_HUGGINGFACE_API_KEY>',
         'Content-Type': 'application/json',
       },
       body: jsonEncode({
@@ -88,7 +88,7 @@ class _SymptomCheckerHomeState extends State<SymptomCheckerHome> {
                 colors: [
                   Colors.teal.shade100,
                   Colors.teal.shade400,
-                  Colors.teal.shade700
+                  Colors.teal.shade700,
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -187,7 +187,9 @@ class _SymptomCheckerHomeState extends State<SymptomCheckerHome> {
                           child: Text(
                             _result,
                             style: TextStyle(
-                                fontSize: 16, color: Colors.teal[800]),
+                              fontSize: 16,
+                              color: Colors.teal[800],
+                            ),
                           ),
                         ),
                       ),
