@@ -74,10 +74,40 @@ class _SymptomCheckerHomeState extends State<SymptomCheckerHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('SymptoChecker AI'),
-        centerTitle: true,
-        elevation: 2,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.teal.shade700, Colors.teal.shade300],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(32)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.teal.withOpacity(0.3),
+                blurRadius: 12,
+                offset: Offset(0, 6),
+              ),
+            ],
+          ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: Text(
+              'SymptoChecker AI',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 26,
+                letterSpacing: 1.2,
+                color: Colors.white,
+              ),
+            ),
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+          ),
+        ),
       ),
       body: Stack(
         children: [
