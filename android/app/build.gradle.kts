@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.symptocheker_ai"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 35 // Updated to fix androidx.annotation-experimental requirement
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
