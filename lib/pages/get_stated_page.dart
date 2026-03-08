@@ -38,8 +38,11 @@ class GetStartedPage extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF1976D2), Color(0xFF64B5F6)],
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.blueGrey.withOpacity(0.15),
+                          Colors.blueGrey.withOpacity(0.15),
+                        ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
@@ -178,6 +181,80 @@ class GetStartedPage extends StatelessWidget {
                         subtitle: 'Your health data stays on your device.',
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 32),
+                  // Add a nice dropdown menu for navigation to other pages
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFE3ECF7),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Color(0xFF1976D2), width: 1.2),
+                    ),
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      icon: const Icon(
+                        Icons.arrow_drop_down,
+                        color: Color(0xFF1976D2),
+                      ),
+                      underline: SizedBox(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF1976D2),
+                        fontSize: 16,
+                      ),
+                      hint: const Text(
+                        'Go to other features',
+                        style: TextStyle(color: Color(0xFF1976D2)),
+                      ),
+                      items: [
+                        DropdownMenuItem(
+                          value: 'history',
+                          child: Text('Symptom History'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'voice',
+                          child: Text('Voice Input'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'image',
+                          child: Text('Image Upload'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'health',
+                          child: Text('Personal Health'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'language',
+                          child: Text('Multi Language'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'provider',
+                          child: Text('Nearby Healthcare Provider'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'emergency',
+                          child: Text('Emergency Guidance'),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        if (value == 'history') {
+                          Navigator.pushNamed(context, '/symptom_history');
+                        } else if (value == 'voice') {
+                          Navigator.pushNamed(context, '/voice_input');
+                        } else if (value == 'image') {
+                          Navigator.pushNamed(context, '/image_upload');
+                        } else if (value == 'health') {
+                          Navigator.pushNamed(context, '/personal_health');
+                        } else if (value == 'language') {
+                          Navigator.pushNamed(context, '/multi_language');
+                        } else if (value == 'provider') {
+                          Navigator.pushNamed(context, '/nearby_provider');
+                        } else if (value == 'emergency') {
+                          Navigator.pushNamed(context, '/emergency_guidance');
+                        }
+                      },
+                    ),
                   ),
                   const SizedBox(height: 32),
                 ],

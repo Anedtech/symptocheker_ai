@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:symptocheker_ai/styles/app_colors.dart';
 import 'home_page.dart'; // Make sure this import points to the file where HomePage is defined
 
 class LoginPage extends StatelessWidget {
@@ -15,7 +16,7 @@ class LoginPage extends StatelessWidget {
         title: const Text(
           'SymptoCheker Ai',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.white,
             fontWeight: FontWeight.bold,
             fontSize: 20,
             letterSpacing: 1,

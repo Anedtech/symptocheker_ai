@@ -39,7 +39,10 @@ class HomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
-                      colors: [Color(0xFF1976D2), Color(0xFF64B5F6)],
+                      colors: [
+                        Colors.blueGrey.withOpacity(0.15),
+                        Colors.blueGrey.withOpacity(0.15),
+                      ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
