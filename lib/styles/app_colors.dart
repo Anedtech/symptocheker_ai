@@ -12,4 +12,5 @@ class AppColors {
   static const green = Color(0xff388E3C); // Green for success
   static const yellow = Color(0xffFBC02D); // Yellow for warning
   static const orange = Color(0xffF57C00); // Orange for info
+  static const bluegrey = Color(0xff607D8B); // Blue-grey for neutral
 }
