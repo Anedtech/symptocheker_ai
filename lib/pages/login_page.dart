@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:symptocheker_ai/styles/app_colors.dart';
+import 'package:symptocheker_ai/widgets/toolbar.dart';
 import 'home_page.dart'; // Make sure this import points to the file where HomePage is defined
 
 class LoginPage extends StatelessWidget {
@@ -9,20 +10,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        elevation: 0,
-        centerTitle: true,
-        title: const Text(
-          'SymptoCheker Ai',
-          style: TextStyle(
-            color: AppColors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            letterSpacing: 1,
-          ),
-        ),
-      ),
+      appBar: const Toolbar(title: 'SymptoCheker Ai'),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
@@ -126,13 +114,13 @@ class LoginPage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF1976D2),
+                        color: AppColors.primary,
                         letterSpacing: 1.2,
                       ),
                     ),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(
-                        color: Color(0xFF1976D2),
+                        color: AppColors.primary,
                         width: 2,
                       ),
                       padding: const EdgeInsets.symmetric(
