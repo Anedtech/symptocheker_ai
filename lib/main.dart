@@ -1,35 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:symptocheker_ai/pages/emergency_guidance_page.dart';
-import 'package:symptocheker_ai/pages/image_upload_page.dart';
-import 'package:symptocheker_ai/pages/multi_language_page.dart';
-import 'package:symptocheker_ai/pages/nearby_page.dart';
-import 'package:symptocheker_ai/pages/personal_health_page.dart';
-import 'package:symptocheker_ai/widgets/voice_input_button.dart';
-import 'pages/login_page.dart'; // Add this import if ImageUploadPage is defined here
-import 'pages/history_page.dart'; // Add this import for HistoryPagimport 'pages/nearby_provider_page.dart'; // Removed because the file does not exist
+import 'package:provider/provider.dart';
+import 'services/api_service.dart';
+import 'repositories/symptom_repository.dart';
+import 'providers/symptom_provider.dart';
+import 'pages/login_page.dart';
+import 'styles/app_colors.dart';
 
 void main() {
-  runApp(const SymptoChekerAiApp());
+  runApp(const MyApp());
 }
 
-class SymptoChekerAiApp extends StatelessWidget {
-  const SymptoChekerAiApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SymptoCheker Ai',
-      debugShowCheckedModeBanner: false,
-      home: const LoginPage(), // This is correct!
-      routes: {
-        '/symptom_history': (context) => const HistoryPage(history: []),
-        '/voice_input': (context) => const VoiceInputPage(),
-        '/image_upload': (context) => const ImageUploadPage(),
-        '/personal_health': (context) => const PersonalHealthPage(),
-        '/multi_language': (context) => const MultiLanguagePage(),
-        '/nearby_provider': (context) => const NearbyProviderPage(),
-        '/emergency_guidance': (context) => const EmergencyGuidancePage(),
-      },
+    return MultiProvider(
+      providers: [
+        // Services
+        Provider<ApiService>(create: (_) => ApiService()),
+
+        // Repositories
+        ProxyProvider<ApiService, SymptomRepository>(
+          create: (_, apiService) => SymptomRepository(apiService),
+          update: (_, apiService, __) => SymptomRepository(apiService),
+        ),
+
+        // Providers (State Management)
+        ChangeNotifierProxyProvider<SymptomRepository, SymptomProvider>(
+          create: (_, repository) => SymptomProvider(repository),
+          update: (_, repository, __) => SymptomProvider(repository),
+        ),
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+          primaryColor: AppColors.primary,
+          scaffoldBackgroundColor: AppColors.background,
+        ),
+        home: const LoginPage(),
+        routes: {
+          '/home': (context) => const HomePage(),
+          '/get-started': (context) => const GetStartedPage(),
+          '/history': (context) => const SymptomHistoryPage(),
+        },
+      ),
     );
   }
 }
