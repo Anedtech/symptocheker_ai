@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:symptocheker_ai/pages/history_page.dart';
+import 'package:symptocheker_ai/pages/image_upload_page.dart';
+import 'package:symptocheker_ai/pages/multi_language_page.dart';
 import 'services/api_service.dart';
 import 'repositories/symptom_repository.dart';
 import 'providers/symptom_provider.dart';
 import 'pages/login_page.dart';
+import 'pages/home_page.dart';
 import 'styles/app_colors.dart';
 
 void main() {
@@ -22,14 +26,30 @@ class MyApp extends StatelessWidget {
 
         // Repositories
         ProxyProvider<ApiService, SymptomRepository>(
-          create: (_, apiService) => SymptomRepository(apiService),
-          update: (_, apiService, __) => SymptomRepository(apiService),
+          create:
+              (BuildContext context) => SymptomRepository(
+                Provider.of<ApiService>(context, listen: false),
+              ),
+          update:
+              (
+                BuildContext context,
+                ApiService apiService,
+                SymptomRepository? previous,
+              ) => SymptomRepository(apiService),
         ),
 
         // Providers (State Management)
         ChangeNotifierProxyProvider<SymptomRepository, SymptomProvider>(
-          create: (_, repository) => SymptomProvider(repository),
-          update: (_, repository, __) => SymptomProvider(repository),
+          create:
+              (BuildContext context) => SymptomProvider(
+                Provider.of<SymptomRepository>(context, listen: false),
+              ),
+          update:
+              (
+                BuildContext context,
+                SymptomRepository repository,
+                SymptomProvider? previous,
+              ) => SymptomProvider(repository),
         ),
       ],
       child: MaterialApp(
@@ -40,8 +60,9 @@ class MyApp extends StatelessWidget {
         home: const LoginPage(),
         routes: {
           '/home': (context) => const HomePage(),
-          '/get-started': (context) => const GetStartedPage(),
-          '/history': (context) => const SymptomHistoryPage(),
+          '/history': (context) => const HomePage(),
+          '/image_upload': (context) => const ImageUploadPage(),
+          '/multi_language': (context) => const MultiLanguagePage(),
         },
       ),
     );
